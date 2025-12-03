@@ -376,59 +376,6 @@ const CourseDetailPage: React.FC = () => {
           )}
         </div>
       </section>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Skills Card */}
-            <Card>
-              <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-4">
-                Skills you'll gain
-              </h3>
-              <ul className="space-y-3">
-                {course.skills.map((skill, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-success dark:text-green-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-text-secondary dark:text-dark-text-secondary">{skill}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            {/* Instructor Card */}
-            <Card>
-              <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-4">Instructor</h3>
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-community rounded-2xl flex items-center justify-center">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <p className="font-semibold text-text-primary dark:text-dark-text-primary">
-                    {course.instructor.name}
-                  </p>
-                  <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                    {course.instructor.role}
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            {/* Certificate Card */}
-            <Card className="bg-gradient-to-br from-primary-light to-community-light dark:from-primary/10 dark:to-community/10 border-none">
-              <div className="text-center">
-                <div className="w-14 h-14 mx-auto mb-4 bg-white dark:bg-dark-card rounded-2xl flex items-center justify-center shadow-soft dark:shadow-dark-soft">
-                  <Award className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-2">
-                  Certificate
-                </h3>
-                <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                  After completing the course, you'll receive a certificate confirming your knowledge.
-                </p>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
     </MainLayout>
   )
 }
