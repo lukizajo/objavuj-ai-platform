@@ -19,7 +19,6 @@ const Header: React.FC = () => {
     { href: '/', label: t('nav.home') },
     { href: '/courses', label: t('nav.courses') },
     { href: '/community', label: t('nav.community') },
-    { href: '/rewards', label: t('nav.rewards') },
     { href: '/podcast', label: t('nav.podcast') },
     { href: '/about', label: t('nav.about') },
   ]

@@ -70,7 +70,7 @@
   }
 
   .gradient-primary {
-    @apply bg-gradient-to-r from-primary to-[#10B981];
+    @apply bg-gradient-to-r from-primary to-orange-500;
   }
 
   .text-gradient {
