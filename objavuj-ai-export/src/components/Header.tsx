@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, BookOpen } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Menu, X, BookOpen, Trophy } from 'lucide-react'
 import { Button } from './ui/Button'
 import { ThemeToggle } from './ui/ThemeToggle'
 import { LanguageSwitcher } from './ui/LanguageSwitcher'
@@ -12,16 +12,43 @@ import { cn } from '@/lib/utils'
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const { isAuthenticated } = useAuthStore()
+
+  // Check if user is currently viewing a course
+  const isInCourse = location.pathname.includes('/course/') && location.pathname.includes('/')
+  const courseSlugMatch = location.pathname.match(/\/course\/([^/]+)/)
+  const currentCourseSlug = courseSlugMatch ? courseSlugMatch[1] : null
+
+  // Context-aware rewards link
+  const rewardsLink = {
+    href: isInCourse && currentCourseSlug 
+      ? `/course/${currentCourseSlug}#rewards`
+      : '/rewards',
+    label: t('rewards.title') || 'Odmeny',
+    icon: Trophy,
+    isRewards: true
+  }
 
   const navLinks = [
     { href: '/', label: t('nav.home') },
     { href: '/courses', label: t('nav.courses') },
     { href: '/community', label: t('nav.community') },
+    { href: rewardsLink.href, label: rewardsLink.label, icon: rewardsLink.icon, isRewards: true },
     { href: '/podcast', label: t('nav.podcast') },
     { href: '/about', label: t('nav.about') },
   ]
+
+  // Handle rewards navigation - if in course context, switch to rewards tab
+  const handleRewardsClick = (e: React.MouseEvent) => {
+    if (isInCourse && currentCourseSlug) {
+      e.preventDefault()
+      // Navigate to course with rewards tab
+      navigate(`/course/${currentCourseSlug}#rewards`)
+      setIsMenuOpen(false)
+    }
+  }
 
   const isActive = (path: string) => {
     if (path === '/') return location.pathname === '/'
@@ -53,14 +80,18 @@ const Header: React.FC = () => {
               <Link
                 key={link.href}
                 to={link.href}
+                onClick={link.isRewards ? handleRewardsClick : undefined}
                 className={cn(
                   'text-base font-medium transition-colors duration-200',
-                  isActive(link.href)
+                  isActive(link.href) || (link.isRewards && isInCourse)
                     ? 'text-primary'
                     : 'text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary'
                 )}
               >
-                {link.label}
+                <div className="flex items-center gap-2">
+                  {link.icon && <link.icon className="w-4 h-4" />}
+                  {link.label}
+                </div>
               </Link>
             ))}
           </nav>
@@ -96,15 +127,18 @@ const Header: React.FC = () => {
                 <Link
                   key={link.href}
                   to={link.href}
+                  onClick={link.isRewards ? handleRewardsClick : () => setIsMenuOpen(false)}
                   className={cn(
                     'px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-200',
-                    isActive(link.href)
+                    isActive(link.href) || (link.isRewards && isInCourse)
                       ? 'bg-primary-light dark:bg-primary/20 text-primary'
                       : 'text-text-secondary dark:text-dark-text-secondary hover:bg-muted dark:hover:bg-dark-muted hover:text-text-primary dark:hover:text-dark-text-primary'
                   )}
-                  onClick={() => setIsMenuOpen(false)}
                 >
-                  {link.label}
+                  <div className="flex items-center gap-2">
+                    {link.icon && <link.icon className="w-4 h-4" />}
+                    {link.label}
+                  </div>
                 </Link>
               ))}
               
