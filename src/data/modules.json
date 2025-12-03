@@ -1,0 +1,343 @@
+{
+  "courseId": "objavuj-ai",
+  "modules": [
+    {
+      "id": "m0",
+      "order": 0,
+      "title": "Uvod do kurzu",
+      "description": "Zoznámte sa s kurzom a AI nástrojmi, ktoré budeme používať. Tento modul je úplne zadarmo!",
+      "duration": "45 min",
+      "lessonsCount": 3,
+      "isFree": true,
+      "isLocked": false,
+      "lessons": [
+        {
+          "id": "l0-1",
+          "order": 1,
+          "title": "Vitajte v kurze OBJAVUJ-AI",
+          "description": "Úvodná lekcia kurzu - ciele, štruktúra a čo sa naučíte",
+          "duration": "10 min",
+          "type": "video",
+          "applications": ["chatgpt", "claude", "midjourney", "gemini", "perplexity"],
+          "isCompleted": false
+        },
+        {
+          "id": "l0-2",
+          "order": 2,
+          "title": "Prehľad AI nástrojov",
+          "description": "Zoznámte sa s nástrojmi, ktoré budeme používať v kurze",
+          "duration": "15 min",
+          "type": "text",
+          "applications": ["chatgpt", "claude", "midjourney", "gemini", "perplexity"],
+          "isCompleted": false
+        },
+        {
+          "id": "l0-3",
+          "order": 3,
+          "title": "Ako sa prihlásiť a začať používať AI nástroje",
+          "description": "Praktický návod na registráciu a prvé kroky s AI nástrojmi",
+          "duration": "20 min",
+          "type": "interactive",
+          "applications": ["chatgpt", "claude", "midjourney", "gemini", "perplexity"],
+          "isCompleted": false
+        }
+      ]
+    },
+    {
+      "id": "m1",
+      "order": 1,
+      "title": "Uvod do umelej inteligencie",
+      "description": "Zistime, co je AI, ako funguje a preco je dolezita pre nasu buducnost. Tento modul je uplne zadarmo!",
+      "duration": "2 hodiny",
+      "lessonsCount": 4,
+      "isFree": true,
+      "isLocked": false,
+      "lessons": [
+        {
+          "id": "l1",
+          "order": 1,
+          "title": "Co je umela inteligencia?",
+          "description": "Zakladna definicia a historia AI",
+          "duration": "30 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l2",
+          "order": 2,
+          "title": "Typy umelej inteligencie",
+          "description": "Narrow AI, General AI, Super AI",
+          "duration": "25 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l3",
+          "order": 3,
+          "title": "Ako AI meni svet",
+          "description": "Prakticke priklady vyuzitia AI v roznych odvetviach",
+          "duration": "35 min",
+          "type": "text",
+          "isCompleted": false
+        },
+        {
+          "id": "l4",
+          "order": 4,
+          "title": "Quiz: Zaklady AI",
+          "description": "Otestujte svoje znalosti",
+          "duration": "15 min",
+          "type": "quiz",
+          "isCompleted": false
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "order": 2,
+      "title": "ChatGPT a jazykove modely",
+      "description": "Naucte sa efektivne vyuzivat ChatGPT a pochopte, ako funguju velke jazykove modely.",
+      "duration": "2.5 hodiny",
+      "lessonsCount": 5,
+      "isFree": false,
+      "isLocked": true,
+      "lessons": [
+        {
+          "id": "l5",
+          "order": 1,
+          "title": "Ako funguje ChatGPT",
+          "description": "Technicky prehlad LLM modelov",
+          "duration": "30 min",
+          "type": "video",
+          "applications": ["chatgpt"],
+          "isCompleted": false
+        },
+        {
+          "id": "l6",
+          "order": 2,
+          "title": "Efektivne promptovanie",
+          "description": "Zaklady pisania efektivnych promptov",
+          "duration": "35 min",
+          "type": "video",
+          "applications": ["chatgpt", "claude"],
+          "isCompleted": false
+        },
+        {
+          "id": "l7",
+          "order": 3,
+          "title": "Prakticke cvicenia",
+          "description": "Hands-on cvicenia s ChatGPT",
+          "duration": "40 min",
+          "type": "interactive",
+          "applications": ["chatgpt", "claude", "gemini"],
+          "isCompleted": false
+        },
+        {
+          "id": "l8",
+          "order": 4,
+          "title": "Pokrocile techniky",
+          "description": "Chain-of-thought, few-shot learning",
+          "duration": "30 min",
+          "type": "video",
+          "applications": ["chatgpt", "claude"],
+          "isCompleted": false
+        },
+        {
+          "id": "l9",
+          "order": 5,
+          "title": "Quiz: ChatGPT Master",
+          "description": "Overte si svoje znalosti",
+          "duration": "15 min",
+          "type": "quiz",
+          "isCompleted": false
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "order": 3,
+      "title": "AI obrazove generatory",
+      "description": "Objavte silu DALL-E, Midjourney a Stable Diffusion. Naucte sa tvorit unikatny vizualny obsah.",
+      "duration": "2 hodiny",
+      "lessonsCount": 4,
+      "isFree": false,
+      "isLocked": true,
+      "lessons": [
+        {
+          "id": "l10",
+          "order": 1,
+          "title": "Uvod do obrazovych generatorov",
+          "description": "Prehlad najpopularnejsich nastrojov",
+          "duration": "25 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l11",
+          "order": 2,
+          "title": "Midjourney od A po Z",
+          "description": "Kompletny tutorial pre Midjourney",
+          "duration": "40 min",
+          "type": "video",
+          "applications": ["midjourney"],
+          "isCompleted": false
+        },
+        {
+          "id": "l12",
+          "order": 3,
+          "title": "DALL-E a Bing Image Creator",
+          "description": "OpenAI obrazove nastroje",
+          "duration": "30 min",
+          "type": "video",
+          "applications": ["midjourney"],
+          "isCompleted": false
+        },
+        {
+          "id": "l13",
+          "order": 4,
+          "title": "Projekt: Vytvorte svoju galeniu",
+          "description": "Prakticke zadanie",
+          "duration": "25 min",
+          "type": "project",
+          "applications": ["midjourney"],
+          "isCompleted": false
+        }
+      ]
+    },
+    {
+      "id": "m4",
+      "order": 4,
+      "title": "AI v praxi - Automatizacia",
+      "description": "Automatizujte rutinne ulohy pomocou AI. Zapier, Make a dalsie nastroje.",
+      "duration": "2 hodiny",
+      "lessonsCount": 4,
+      "isFree": false,
+      "isLocked": true,
+      "lessons": [
+        {
+          "id": "l14",
+          "order": 1,
+          "title": "Uvod do automatizacie",
+          "description": "Preco a ako automatizovat",
+          "duration": "20 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l15",
+          "order": 2,
+          "title": "Zapier + AI",
+          "description": "Automatizacia s AI integraciami",
+          "duration": "35 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l16",
+          "order": 3,
+          "title": "Make (Integromat)",
+          "description": "Vizualna automatizacia",
+          "duration": "35 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l17",
+          "order": 4,
+          "title": "Projekt: Vas prvy workflow",
+          "description": "Vytvorte vlastnu automatizaciu",
+          "duration": "30 min",
+          "type": "project",
+          "isCompleted": false
+        }
+      ]
+    },
+    {
+      "id": "m5",
+      "order": 5,
+      "title": "AI pre kreativitu",
+      "description": "Hudba, video, text - AI nastroje pre kreativcov.",
+      "duration": "2 hodiny",
+      "lessonsCount": 4,
+      "isFree": false,
+      "isLocked": true,
+      "lessons": [
+        {
+          "id": "l18",
+          "order": 1,
+          "title": "AI hudba a zvuk",
+          "description": "Suno, Udio a dalsie",
+          "duration": "30 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l19",
+          "order": 2,
+          "title": "AI video generatory",
+          "description": "Runway, Pika, Sora",
+          "duration": "35 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l20",
+          "order": 3,
+          "title": "AI pisanie a content",
+          "description": "Claude, Jasper, Copy.ai",
+          "duration": "30 min",
+          "type": "video",
+          "applications": ["claude", "chatgpt"],
+          "isCompleted": false
+        },
+        {
+          "id": "l21",
+          "order": 4,
+          "title": "Kreativny projekt",
+          "description": "Kombinujte AI nastroje",
+          "duration": "25 min",
+          "type": "project",
+          "isCompleted": false
+        }
+      ]
+    },
+    {
+      "id": "m6",
+      "order": 6,
+      "title": "Etika a buducnost AI",
+      "description": "Zodpovedne vyuzivanie AI a pohlad do buducnosti.",
+      "duration": "1.5 hodiny",
+      "lessonsCount": 3,
+      "isFree": false,
+      "isLocked": true,
+      "lessons": [
+        {
+          "id": "l22",
+          "order": 1,
+          "title": "Eticke vyuzivanie AI",
+          "description": "Bias, sukromie, bezpecnost",
+          "duration": "30 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l23",
+          "order": 2,
+          "title": "Buducnost AI",
+          "description": "Kam smeruje umela inteligencia",
+          "duration": "30 min",
+          "type": "video",
+          "isCompleted": false
+        },
+        {
+          "id": "l24",
+          "order": 3,
+          "title": "Zaverecny test",
+          "description": "Certifikacia OBJAVUJ-AI",
+          "duration": "30 min",
+          "type": "quiz",
+          "isCompleted": false
+        }
+      ]
+    }
+  ]
+}
