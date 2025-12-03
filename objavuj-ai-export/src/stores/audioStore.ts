@@ -23,6 +23,7 @@ export interface AudioState {
   toggleMute: () => void
   setDuration: (duration: number) => void
   setCurrentTime: (time: number) => void
+  setIsLoaded: (loaded: boolean) => void
   clearAudio: () => void
 }
 

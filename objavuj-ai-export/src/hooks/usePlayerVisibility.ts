@@ -15,7 +15,7 @@ export const usePlayerVisibility = ({
   rootMargin = '0px'
 }: UsePlayerVisibilityProps = {}) => {
   const [isVisible, setIsVisible] = useState(true)
-  const ref = useRef<HTMLElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const element = ref.current
