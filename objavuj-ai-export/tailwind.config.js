@@ -72,7 +72,7 @@ module.exports = {
 				
 				// UI States
 				input: '#F1F5F9',
-				ring: #F97316
+				ring: "#F97316"
 				muted: {
 					DEFAULT: '#F1F5F9',
 					foreground: '#64748B',
