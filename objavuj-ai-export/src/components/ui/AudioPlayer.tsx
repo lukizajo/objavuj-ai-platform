@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import { Play, Pause, Volume2, VolumeX, SkipBack, SkipForward } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useAudioStore } from '@/stores/audioStore'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 interface AudioPlayerProps {
   src?: string
@@ -13,44 +15,21 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
   title = 'Audio Lesson',
   className 
 }) => {
-  const audioRef = useRef<HTMLAudioElement>(null)
   const progressRef = useRef<HTMLDivElement>(null)
+  const audioRef = useAudioPlayer({ src, title, autoPlay: false })
   
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [volume, setVolume] = useState(1)
-  const [isMuted, setIsMuted] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
-  
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-    
-    const handleLoadedMetadata = () => {
-      setDuration(audio.duration)
-      setIsLoaded(true)
-    }
-    
-    const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime)
-    }
-    
-    const handleEnded = () => {
-      setIsPlaying(false)
-      setCurrentTime(0)
-    }
-    
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
-    audio.addEventListener('timeupdate', handleTimeUpdate)
-    audio.addEventListener('ended', handleEnded)
-    
-    return () => {
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
-      audio.removeEventListener('timeupdate', handleTimeUpdate)
-      audio.removeEventListener('ended', handleEnded)
-    }
-  }, [src])
+  const {
+    isPlaying,
+    currentTime,
+    duration,
+    volume,
+    isMuted,
+    isLoaded,
+    togglePlay,
+    toggleMute,
+    seek,
+    setVolume
+  } = useAudioStore()
   
   const formatTime = (time: number): string => {
     if (isNaN(time)) return '0:00'
@@ -59,34 +38,9 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
     return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
   
-  const togglePlay = () => {
-    const audio = audioRef.current
-    if (!audio) return
-    
-    if (isPlaying) {
-      audio.pause()
-    } else {
-      audio.play()
-    }
-    setIsPlaying(!isPlaying)
-  }
-  
-  const toggleMute = () => {
-    const audio = audioRef.current
-    if (!audio) return
-    
-    audio.muted = !isMuted
-    setIsMuted(!isMuted)
-  }
-  
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current
-    if (!audio) return
-    
     const value = parseFloat(e.target.value)
-    audio.volume = value
     setVolume(value)
-    setIsMuted(value === 0)
   }
   
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -100,10 +54,8 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
   }
   
   const skip = (seconds: number) => {
-    const audio = audioRef.current
-    if (!audio) return
-    
-    audio.currentTime = Math.max(0, Math.min(audio.currentTime + seconds, duration))
+    const newTime = Math.max(0, Math.min(currentTime + seconds, duration))
+    seek(newTime)
   }
   
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0
@@ -127,7 +79,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
       'rounded-xl p-4 shadow-soft',
       className
     )}>
-      <audio ref={audioRef} src={src} preload="metadata" />
+      <audio ref={audioRef} preload="metadata" />
       
       <div className="flex items-center gap-4">
         {/* Play Controls */}
@@ -147,7 +99,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
               'bg-white text-secondary hover:bg-white/90',
               'transition-all duration-200 shadow-soft'
             )}
-            aria-label={isPlaying ? 'Pause' : 'Play'}
+            aria-label={isPlaying ? 'Pozastavi' : 'Prehrať'}
           >
             {isPlaying ? (
               <Pause className="w-5 h-5" />
@@ -191,7 +143,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
           <button
             onClick={toggleMute}
             className="p-2 text-white/70 hover:text-white transition-colors"
-            aria-label={isMuted ? 'Unmute' : 'Mute'}
+            aria-label={isMuted ? 'Zapnúť zvuk' : 'Stlmiť zvuk'}
           >
             {isMuted || volume === 0 ? (
               <VolumeX className="w-5 h-5" />

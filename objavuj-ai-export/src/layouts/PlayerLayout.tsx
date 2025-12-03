@@ -5,6 +5,7 @@ import { useTranslation } from '@/hooks/useTranslation'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 import { UserProfile } from '@/components/ui/UserProfile'
+import { MiniPlayer } from '@/components/ui/MiniPlayer'
 
 interface PlayerLayoutProps {
   children: React.ReactNode
@@ -14,6 +15,7 @@ interface PlayerLayoutProps {
   onNextLesson?: () => void
   hasPrevLesson?: boolean
   hasNextLesson?: boolean
+  showMiniPlayer?: boolean
 }
 
 const PlayerLayout: React.FC<PlayerLayoutProps> = ({ 
@@ -23,7 +25,8 @@ const PlayerLayout: React.FC<PlayerLayoutProps> = ({
   onPrevLesson,
   onNextLesson,
   hasPrevLesson = false,
-  hasNextLesson = false
+  hasNextLesson = false,
+  showMiniPlayer = false
 }) => {
   const { t } = useTranslation()
   
@@ -43,39 +46,43 @@ const PlayerLayout: React.FC<PlayerLayoutProps> = ({
             </Link>
           </div>
           
-          {/* Center: Home Link & Lesson Navigation */}
-          <div className="flex items-center gap-3">
-            {/* Previous Lesson */}
-            {hasPrevLesson && onPrevLesson && (
-              <button
-                onClick={onPrevLesson}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:bg-muted dark:hover:bg-dark-muted hover:text-text-primary dark:hover:text-dark-text-primary transition-colors"
+          {/* Center: Mini Player or Navigation */}
+          {showMiniPlayer ? (
+            <MiniPlayer className="mx-auto" />
+          ) : (
+            <div className="flex items-center gap-3">
+              {/* Previous Lesson */}
+              {hasPrevLesson && onPrevLesson && (
+                <button
+                  onClick={onPrevLesson}
+                  className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:bg-muted dark:hover:bg-dark-muted hover:text-text-primary dark:hover:text-dark-text-primary transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  <span className="hidden md:inline">{t('player.previous')}</span>
+                </button>
+              )}
+              
+              {/* Home Link */}
+              <Link
+                to="/"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
               >
-                <ChevronLeft className="w-4 h-4" />
-                <span className="hidden md:inline">{t('player.previous')}</span>
-              </button>
-            )}
-            
-            {/* Home Link */}
-            <Link
-              to="/"
-              className="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
-            >
-              <Home className="w-4 h-4" />
-              <span className="font-medium text-sm">{t('nav.home')}</span>
-            </Link>
-            
-            {/* Next Lesson */}
-            {hasNextLesson && onNextLesson && (
-              <button
-                onClick={onNextLesson}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:bg-muted dark:hover:bg-dark-muted hover:text-text-primary dark:hover:text-dark-text-primary transition-colors"
-              >
-                <span className="hidden md:inline">{t('player.next')}</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            )}
-          </div>
+                <Home className="w-4 h-4" />
+                <span className="font-medium text-sm">{t('nav.home')}</span>
+              </Link>
+              
+              {/* Next Lesson */}
+              {hasNextLesson && onNextLesson && (
+                <button
+                  onClick={onNextLesson}
+                  className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:bg-muted dark:hover:bg-dark-muted hover:text-text-primary dark:hover:text-dark-text-primary transition-colors"
+                >
+                  <span className="hidden md:inline">{t('player.next')}</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          )}
           
           {/* Right: Settings & Profile */}
           <div className="flex items-center gap-2">
