@@ -1,0 +1,90 @@
+{
+  "courses": [
+    {
+      "id": "objavuj-ai",
+      "slug": "objavuj-ai",
+      "title": "OBJAVUJ-AI",
+      "subtitle": "Komplexny kurz o umelej inteligencii",
+      "description": "Nauzte sa vsetko o umelej inteligencii - od zakladov po pokrocile techniky. Tento kurz vas prevedie celym svetom AI a nauci vas vyuzivat tieto nastroje vo vasom zivote a praci.",
+      "image": "/images/course-ai.svg",
+      "duration": "12 hodin",
+      "difficulty": "Zaciatocnik",
+      "modulesCount": 6,
+      "lessonsCount": 24,
+      "studentsCount": 1250,
+      "rating": 4.9,
+      "price": 79,
+      "currency": "EUR",
+      "isFeatured": true,
+      "skills": [
+        "Porozumenie AI a strojoveho ucenia",
+        "Prakticke vyuzitie ChatGPT a dalsich nastrojov",
+        "Tvorba obsahu pomocou AI",
+        "Automatizacia pracovnych procesov",
+        "Eticke vyuzivanie umelej inteligencie",
+        "Budovanie AI-powered aplikacii"
+      ],
+      "instructor": {
+        "name": "OBJAVUJ-AI Team",
+        "role": "AI Experti",
+        "avatar": "/images/instructor.svg"
+      }
+    },
+    {
+      "id": "prompt-engineering",
+      "slug": "prompt-engineering",
+      "title": "Prompt Engineering",
+      "subtitle": "Majstrovstvo v komunikacii s AI",
+      "description": "Naucte sa pisat efektivne prompty pre ChatGPT, Claude, Gemini a dalsie AI modely. Odhalte tajomstva profesionalnych prompt engineerov.",
+      "image": "/images/course-prompt.svg",
+      "duration": "6 hodin",
+      "difficulty": "Stredne pokrocily",
+      "modulesCount": 4,
+      "lessonsCount": 16,
+      "studentsCount": 856,
+      "rating": 4.8,
+      "price": 49,
+      "currency": "EUR",
+      "isFeatured": false,
+      "skills": [
+        "Zakladne principy prompt engineeringu",
+        "Pokrocile techniky promptovania",
+        "Chain-of-thought reasoning",
+        "Role-playing a system prompty"
+      ],
+      "instructor": {
+        "name": "OBJAVUJ-AI Team",
+        "role": "AI Experti",
+        "avatar": "/images/instructor.svg"
+      }
+    },
+    {
+      "id": "ai-pre-biznis",
+      "slug": "ai-pre-biznis",
+      "title": "AI pre Biznis",
+      "subtitle": "Transformujte svoj podnik s AI",
+      "description": "Prakticke vyuzitie AI nastrojov pre maly a stredny biznis. Automatizujte procesy, zlepsujte zakaznicku skusenost a zvysujte produktivitu.",
+      "image": "/images/course-business.svg",
+      "duration": "8 hodin",
+      "difficulty": "Stredne pokrocily",
+      "modulesCount": 5,
+      "lessonsCount": 20,
+      "studentsCount": 634,
+      "rating": 4.7,
+      "price": 69,
+      "currency": "EUR",
+      "isFeatured": false,
+      "skills": [
+        "AI strategie pre biznis",
+        "Automatizacia zakaznickeho servisu",
+        "AI v marketingu a predaji",
+        "Analyza dat a rozhodovanie"
+      ],
+      "instructor": {
+        "name": "OBJAVUJ-AI Team",
+        "role": "AI Experti",
+        "avatar": "/images/instructor.svg"
+      }
+    }
+  ]
+}

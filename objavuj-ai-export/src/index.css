@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    --background: 248 250 252;
+    --foreground: 26 26 26;
+  }
+
+  .dark {
+    --background: 10 10 10;
+    --foreground: 249 250 251;
+  }
+
+  * {
+    @apply border-border dark:border-dark-border;
+  }
+
+  body {
+    @apply bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-hover dark:hover:shadow-dark-hover;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white font-semibold px-6 py-3 rounded-xl 
+           transition-all duration-300 ease-out
+           hover:bg-primary-hover hover:shadow-hover hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+           dark:focus:ring-offset-dark-background;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white font-semibold px-6 py-3 rounded-xl 
+           transition-all duration-300 ease-out
+           hover:bg-secondary-hover hover:shadow-hover hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2
+           dark:focus:ring-offset-dark-background;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border-2 border-secondary dark:border-dark-text-secondary text-secondary dark:text-dark-text-primary font-semibold px-6 py-3 rounded-xl 
+           transition-all duration-300 ease-out
+           hover:bg-secondary hover:text-white hover:-translate-y-0.5
+           dark:hover:bg-secondary dark:hover:text-white
+           focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2
+           dark:focus:ring-offset-dark-background;
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary to-[#FF6B35];
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-community bg-clip-text text-transparent;
+  }
+  
+  /* Dark mode card styles */
+  .dark .card {
+    @apply bg-dark-card border-dark-border shadow-dark-soft;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out forwards;
+  }
+}
+
+/* Custom scrollbar - Light Mode */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Custom scrollbar - Dark Mode */
+.dark ::-webkit-scrollbar-track {
+  background: #1F2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #374151;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4B5563;
+}
+
+/* Focus styles for accessibility */
+a:focus-visible,
+button:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2 dark:ring-offset-dark-background;
+}
+
+img {
+  object-position: top;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* Override for animations that shouldn't have the transition */
+.animate-fade-in,
+.animate-slide-up,
+.animate-slide-up-panel,
+[class*="hover:"] {
+  transition-property: all;
+}

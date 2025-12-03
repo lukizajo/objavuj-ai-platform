@@ -1,0 +1,36 @@
+{
+  "user": {
+    "id": "demo-user-1",
+    "name": "Jan Novak",
+    "email": "jan.novak@example.com",
+    "avatar": "/images/avatar.svg",
+    "joinedAt": "2024-11-15",
+    "xp": 450,
+    "level": 3,
+    "badges": [
+      {
+        "id": "b1",
+        "name": "Zaciatocnik",
+        "icon": "star",
+        "earnedAt": "2024-11-15"
+      },
+      {
+        "id": "b2",
+        "name": "Prvy modul",
+        "icon": "trophy",
+        "earnedAt": "2024-11-20"
+      }
+    ],
+    "enrolledCourses": [
+      {
+        "courseId": "objavuj-ai",
+        "enrolledAt": "2024-11-15",
+        "progress": 25,
+        "currentModule": "m2",
+        "currentLesson": "l5",
+        "completedLessons": ["l1", "l2", "l3", "l4"],
+        "lastAccessedAt": "2024-12-01"
+      }
+    ]
+  }
+}
