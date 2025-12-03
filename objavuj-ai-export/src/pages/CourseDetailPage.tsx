@@ -12,12 +12,14 @@ import {
   MessageSquare,
   Video,
   HelpCircle,
+  Trophy,
 } from 'lucide-react'
 import MainLayout from '@/layouts/MainLayout'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { ModuleCard } from '@/components/course/ModuleCard'
+import CourseRewards from '@/components/course/CourseRewards'
 import { useTranslation } from '@/hooks/useTranslation'
 import {
   fetchCourseBySlug,
@@ -26,6 +28,8 @@ import {
   type Module,
 } from '@/lib/api'
 
+type CourseTabType = 'overview' | 'content' | 'rewards'
+
 const CourseDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
@@ -33,6 +37,7 @@ const CourseDetailPage: React.FC = () => {
   const [course, setCourse] = useState<Course | null>(null)
   const [modules, setModules] = useState<Module[]>([])
   const [expandedModule, setExpandedModule] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<CourseTabType>('overview')
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -48,6 +53,20 @@ const CourseDetailPage: React.FC = () => {
       setIsLoading(false)
     }
     loadData()
+  }, [slug])
+
+  // Handle hash-based navigation to rewards tab
+  useEffect(() => {
+    if (window.location.hash === '#rewards') {
+      setActiveTab('rewards')
+      // Smooth scroll to the content section
+      setTimeout(() => {
+        const element = document.querySelector('section')
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    }
   }, [slug])
 
   const handleStartModule = (moduleId: string, lessonId: string) => {
@@ -163,11 +182,160 @@ const CourseDetailPage: React.FC = () => {
 
       {/* Content Section */}
       <section className="container-custom section-padding">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Modules */}
-            <div>
+        <div className="space-y-8">
+          {/* Tab Navigation */}
+          <div className="flex justify-center">
+            <div className="bg-muted dark:bg-dark-muted rounded-lg p-1 flex">
+              <button
+                onClick={() => setActiveTab('overview')}
+                className={`px-6 py-3 rounded-md font-medium transition-colors ${
+                  activeTab === 'overview'
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary'
+                }`}
+              >
+                Prehľad
+              </button>
+              <button
+                onClick={() => setActiveTab('content')}
+                className={`px-6 py-3 rounded-md font-medium transition-colors ${
+                  activeTab === 'content'
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary'
+                }`}
+              >
+                Obsah kurzu
+              </button>
+              <button
+                onClick={() => setActiveTab('rewards')}
+                className={`px-6 py-3 rounded-md font-medium transition-colors ${
+                  activeTab === 'rewards'
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Trophy className="w-4 h-4" />
+                  Odmeny
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Tab Content */}
+          {activeTab === 'overview' && (
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-8">
+                {/* What's Inside */}
+                <Card>
+                  <h2 className="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-6">
+                    What's inside the course
+                  </h2>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-primary-light dark:bg-primary/20 rounded-xl flex items-center justify-center">
+                        <Video className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-text-primary dark:text-dark-text-primary">Video Lessons</p>
+                        <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                          High quality recorded videos
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-secondary-light dark:bg-secondary/20 rounded-xl flex items-center justify-center">
+                        <Download className="w-5 h-5 text-secondary dark:text-dark-text-secondary" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-text-primary dark:text-dark-text-primary">Materials</p>
+                        <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                          PDFs and additional resources
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-success-light dark:bg-success/20 rounded-xl flex items-center justify-center">
+                        <HelpCircle className="w-5 h-5 text-success dark:text-green-400" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-text-primary dark:text-dark-text-primary">Quizzes</p>
+                        <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                          Test your knowledge
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-community-light dark:bg-community/20 rounded-xl flex items-center justify-center">
+                        <MessageSquare className="w-5 h-5 text-community" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-text-primary dark:text-dark-text-primary">{t('ai.title')}</p>
+                        <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                          Helps with questions
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Skills Card */}
+                <Card>
+                  <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-4">
+                    Skills you'll gain
+                  </h3>
+                  <ul className="space-y-3">
+                    {course.skills.map((skill, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-success dark:text-green-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm text-text-secondary dark:text-dark-text-secondary">{skill}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+
+                {/* Instructor Card */}
+                <Card>
+                  <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-4">Instructor</h3>
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-community rounded-2xl flex items-center justify-center">
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-text-primary dark:text-dark-text-primary">
+                        {course.instructor.name}
+                      </p>
+                      <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                        {course.instructor.role}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Certificate Card */}
+                <Card className="bg-gradient-to-br from-primary-light to-community-light dark:from-primary/10 dark:to-community/10 border-none">
+                  <div className="text-center">
+                    <div className="w-14 h-14 mx-auto mb-4 bg-white dark:bg-dark-card rounded-2xl flex items-center justify-center shadow-soft dark:shadow-dark-soft">
+                      <Award className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-2">
+                      Certificate
+                    </h3>
+                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                      After completing the course, you'll receive a certificate confirming your knowledge.
+                    </p>
+                  </div>
+                </Card>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'content' && (
+            <div className="space-y-8">
               <h2 className="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-6">
                 {t('player.courseContent')}
               </h2>
@@ -191,111 +359,21 @@ const CourseDetailPage: React.FC = () => {
                 ))}
               </div>
             </div>
+          )}
 
-            {/* What's Inside */}
-            <Card>
-              <h2 className="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-6">
-                What's inside the course
-              </h2>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-light dark:bg-primary/20 rounded-xl flex items-center justify-center">
-                    <Video className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-text-primary dark:text-dark-text-primary">Video Lessons</p>
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                      High quality recorded videos
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-secondary-light dark:bg-secondary/20 rounded-xl flex items-center justify-center">
-                    <Download className="w-5 h-5 text-secondary dark:text-dark-text-secondary" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-text-primary dark:text-dark-text-primary">Materials</p>
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                      PDFs and additional resources
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-success-light dark:bg-success/20 rounded-xl flex items-center justify-center">
-                    <HelpCircle className="w-5 h-5 text-success dark:text-green-400" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-text-primary dark:text-dark-text-primary">Quizzes</p>
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                      Test your knowledge
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-community-light dark:bg-community/20 rounded-xl flex items-center justify-center">
-                    <MessageSquare className="w-5 h-5 text-community" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-text-primary dark:text-dark-text-primary">{t('ai.title')}</p>
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                      Helps with questions
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Skills Card */}
-            <Card>
-              <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-4">
-                Skills you'll gain
-              </h3>
-              <ul className="space-y-3">
-                {course.skills.map((skill, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-success dark:text-green-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-text-secondary dark:text-dark-text-secondary">{skill}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            {/* Instructor Card */}
-            <Card>
-              <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-4">Instructor</h3>
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-community rounded-2xl flex items-center justify-center">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <p className="font-semibold text-text-primary dark:text-dark-text-primary">
-                    {course.instructor.name}
-                  </p>
-                  <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                    {course.instructor.role}
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            {/* Certificate Card */}
-            <Card className="bg-gradient-to-br from-primary-light to-community-light dark:from-primary/10 dark:to-community/10 border-none">
+          {activeTab === 'rewards' && (
+            <div className="space-y-6">
               <div className="text-center">
-                <div className="w-14 h-14 mx-auto mb-4 bg-white dark:bg-dark-card rounded-2xl flex items-center justify-center shadow-soft dark:shadow-dark-soft">
-                  <Award className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="font-semibold text-text-primary dark:text-dark-text-primary mb-2">
-                  Certificate
-                </h3>
-                <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                  After completing the course, you'll receive a certificate confirming your knowledge.
+                <h2 className="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">
+                  Odmeny a úspechy
+                </h2>
+                <p className="text-text-secondary dark:text-dark-text-secondary">
+                  Sledujte svoj pokrok a získajte odmeny za dokončené lekcie
                 </p>
               </div>
-            </Card>
-          </div>
+              <CourseRewards compact={true} />
+            </div>
+          )}
         </div>
       </section>
     </MainLayout>

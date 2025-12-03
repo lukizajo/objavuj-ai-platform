@@ -46,9 +46,9 @@ module.exports = {
 				
 				// Accent Colors
 				primary: {
-					DEFAULT: '#FF8A26',
-					hover: '#E67A1C',
-					light: '#FFF3E8',
+					DEFAULT: '#F97316',
+					hover: '#EA580C',
+					light: '#FFEDD5',
 					foreground: '#FFFFFF',
 				},
 				secondary: {
@@ -72,7 +72,7 @@ module.exports = {
 				
 				// UI States
 				input: '#F1F5F9',
-				ring: '#FF8A26',
+				ring: "#F97316",
 				muted: {
 					DEFAULT: '#F1F5F9',
 					foreground: '#64748B',

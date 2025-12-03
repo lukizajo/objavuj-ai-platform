@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { BookOpen, ArrowLeft, ChevronLeft, ChevronRight, Home } from 'lucide-react'
+import { BookOpen, ArrowLeft, ChevronLeft, ChevronRight, Home, Trophy } from 'lucide-react'
 import { useTranslation } from '@/hooks/useTranslation'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
@@ -69,6 +69,15 @@ const PlayerLayout: React.FC<PlayerLayoutProps> = ({
               >
                 <Home className="w-4 h-4" />
                 <span className="font-medium text-sm">{t('nav.home')}</span>
+              </Link>
+              
+              {/* Rewards Link */}
+              <Link
+                to="/rewards"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-lg text-text-secondary dark:text-dark-text-secondary hover:bg-muted dark:hover:bg-dark-muted hover:text-text-primary dark:hover:text-dark-text-primary transition-colors"
+              >
+                <Trophy className="w-4 h-4" />
+                <span className="font-medium text-sm">{t('nav.rewards')}</span>
               </Link>
               
               {/* Next Lesson */}
