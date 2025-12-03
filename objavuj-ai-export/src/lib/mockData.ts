@@ -731,6 +731,323 @@ export const mockCommunityPosts: MockCommunityPost[] = [
   }
 ]
 
+// Reward System
+export interface MockReward {
+  id: string
+  title: string
+  description: string
+  icon: string
+  pointsRequired: number
+  type: 'badge' | 'level' | 'streak' | 'achievement'
+  rarity: 'common' | 'rare' | 'epic' | 'legendary'
+  isUnlocked: boolean
+  unlockedAt?: string
+}
+
+export interface MockUserReward {
+  userId: string
+  rewardId: string
+  unlockedAt: string
+  pointsEarned: number
+}
+
+export interface MockLeaderboardEntry {
+  userId: string
+  userName: string
+  userAvatar: string
+  totalPoints: number
+  completedCourses: number
+  rank: number
+  streakDays: number
+  level: string
+}
+
+// Mock Rewards Data
+export const mockRewards: MockReward[] = [
+  // Level-based rewards
+  {
+    id: 'level-beginner',
+    title: 'Začiatočník',
+    description: 'Začnite svoju cestu AI',
+    icon: '🌱',
+    pointsRequired: 0,
+    type: 'level',
+    rarity: 'common',
+    isUnlocked: true,
+    unlockedAt: '2024-01-01T00:00:00Z'
+  },
+  {
+    id: 'level-intermediate',
+    title: 'Stredne pokročilý',
+    description: 'Pokročilý AI používateľ',
+    icon: '🚀',
+    pointsRequired: 500,
+    type: 'level',
+    rarity: 'common',
+    isUnlocked: false
+  },
+  {
+    id: 'level-advanced',
+    title: 'Pokročilý',
+    description: 'Skúsený AI expert',
+    icon: '⚡',
+    pointsRequired: 1500,
+    type: 'level',
+    rarity: 'rare',
+    isUnlocked: false
+  },
+  {
+    id: 'level-expert',
+    title: 'Expert',
+    description: 'AI expert a mentor',
+    icon: '🏆',
+    pointsRequired: 3000,
+    type: 'level',
+    rarity: 'epic',
+    isUnlocked: false
+  },
+  {
+    id: 'level-master',
+    title: 'Majster',
+    description: 'Majster AI technológií',
+    icon: '👑',
+    pointsRequired: 5000,
+    type: 'level',
+    rarity: 'legendary',
+    isUnlocked: false
+  },
+  
+  // Achievement badges
+  {
+    id: 'achievement-first-lesson',
+    title: 'Prvá lekcia',
+    description: 'Dokončili ste svoju prvú lekciu',
+    icon: '🎯',
+    pointsRequired: 10,
+    type: 'achievement',
+    rarity: 'common',
+    isUnlocked: true,
+    unlockedAt: '2024-01-15T10:30:00Z'
+  },
+  {
+    id: 'achievement-first-course',
+    title: 'Prvý kurz',
+    description: 'Dokončili ste svoj prvý kurz',
+    icon: '📚',
+    pointsRequired: 100,
+    type: 'achievement',
+    rarity: 'common',
+    isUnlocked: false
+  },
+  {
+    id: 'achievement-perfect-score',
+    title: 'Perfektné skóre',
+    description: 'Získali ste 100% v teste',
+    icon: '💯',
+    pointsRequired: 200,
+    type: 'achievement',
+    rarity: 'rare',
+    isUnlocked: false
+  },
+  {
+    id: 'achievement-quick-learner',
+    title: 'Rýchly študent',
+    description: 'Dokončili ste lekciu za menej ako 30 minút',
+    icon: '⚡',
+    pointsRequired: 150,
+    type: 'achievement',
+    rarity: 'rare',
+    isUnlocked: false
+  },
+  {
+    id: 'achievement-dedicated-learner',
+    title: 'Oddaný študent',
+    description: 'Študovali ste 7 dní v rade',
+    icon: '🔥',
+    pointsRequired: 300,
+    type: 'streak',
+    rarity: 'epic',
+    isUnlocked: false
+  },
+  {
+    id: 'achievement-ai-explorer',
+    title: 'AI prieskumník',
+    description: 'Použili ste všetky AI nástroje v kurze',
+    icon: '🔍',
+    pointsRequired: 250,
+    type: 'achievement',
+    rarity: 'rare',
+    isUnlocked: false
+  },
+  {
+    id: 'achievement-prompt-master',
+    title: 'Majster promptov',
+    description: 'Vytvorili ste 50 efektívnych promptov',
+    icon: '✍️',
+    pointsRequired: 400,
+    type: 'achievement',
+    rarity: 'epic',
+    isUnlocked: false
+  },
+  {
+    id: 'achievement-course-completer',
+    title: 'Dokončovateľ kurzov',
+    description: 'Dokončili ste 5 kurzov',
+    icon: '🎓',
+    pointsRequired: 1000,
+    type: 'achievement',
+    rarity: 'epic',
+    isUnlocked: false
+  },
+  {
+    id: 'achievement-streak-7',
+    title: '7-dňová séria',
+    description: 'Študovali ste 7 dní v rade',
+    icon: '📅',
+    pointsRequired: 70,
+    type: 'streak',
+    rarity: 'common',
+    isUnlocked: true,
+    unlockedAt: '2024-01-20T14:00:00Z'
+  },
+  {
+    id: 'achievement-streak-30',
+    title: '30-dňová séria',
+    description: 'Študovali ste 30 dní v rade',
+    icon: '🏃‍♂️',
+    pointsRequired: 300,
+    type: 'streak',
+    rarity: 'epic',
+    isUnlocked: false
+  }
+]
+
+// Mock User Rewards
+export const mockUserRewards: MockUserReward[] = [
+  {
+    userId: 'user-1',
+    rewardId: 'level-beginner',
+    unlockedAt: '2024-01-01T00:00:00Z',
+    pointsEarned: 0
+  },
+  {
+    userId: 'user-1',
+    rewardId: 'achievement-first-lesson',
+    unlockedAt: '2024-01-15T10:30:00Z',
+    pointsEarned: 10
+  },
+  {
+    userId: 'user-1',
+    rewardId: 'achievement-streak-7',
+    unlockedAt: '2024-01-20T14:00:00Z',
+    pointsEarned: 70
+  }
+]
+
+// Mock Leaderboard
+export const mockLeaderboard: MockLeaderboardEntry[] = [
+  {
+    userId: 'user-1',
+    userName: 'Demo User',
+    userAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 280,
+    completedCourses: 2,
+    rank: 1,
+    streakDays: 7,
+    level: 'Začiatočník'
+  },
+  {
+    userId: 'user-2',
+    userName: 'Martina Kováčová',
+    userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 1240,
+    completedCourses: 5,
+    rank: 2,
+    streakDays: 15,
+    level: 'Stredne pokročilý'
+  },
+  {
+    userId: 'user-3',
+    userName: 'Ján Novotný',
+    userAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 890,
+    completedCourses: 3,
+    rank: 3,
+    streakDays: 12,
+    level: 'Stredne pokročilý'
+  },
+  {
+    userId: 'user-4',
+    userName: 'Peter Horváth',
+    userAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 756,
+    completedCourses: 3,
+    rank: 4,
+    streakDays: 8,
+    level: 'Pokročilý'
+  },
+  {
+    userId: 'user-5',
+    userName: 'Lucia Szabová',
+    userAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 520,
+    completedCourses: 2,
+    rank: 5,
+    streakDays: 5,
+    level: 'Pokročilý'
+  },
+  {
+    userId: 'user-6',
+    userName: 'Tomáš Krajčír',
+    userAvatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 445,
+    completedCourses: 2,
+    rank: 6,
+    streakDays: 4,
+    level: 'Začiatočník'
+  },
+  {
+    userId: 'user-7',
+    userName: 'Anna Moravčíková',
+    userAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 380,
+    completedCourses: 1,
+    rank: 7,
+    streakDays: 3,
+    level: 'Začiatočník'
+  },
+  {
+    userId: 'user-8',
+    userName: 'Marek Dvořák',
+    userAvatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 320,
+    completedCourses: 1,
+    rank: 8,
+    streakDays: 2,
+    level: 'Začiatočník'
+  },
+  {
+    userId: 'user-9',
+    userName: 'Zuzana Fialová',
+    userAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 180,
+    completedCourses: 1,
+    rank: 9,
+    streakDays: 1,
+    level: 'Začiatočník'
+  },
+  {
+    userId: 'user-10',
+    userName: 'Roman Veselý',
+    userAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
+    totalPoints: 120,
+    completedCourses: 0,
+    rank: 10,
+    streakDays: 0,
+    level: 'Začiatočník'
+  }
+]
+
 // News Articles
 export interface MockNewsArticle {
   id: string

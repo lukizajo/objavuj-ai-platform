@@ -16,6 +16,7 @@ import CommunityPage from './pages/CommunityPage'
 import PricingPage from './pages/PricingPage'
 import PurchasePage from './pages/PurchasePage'
 import AboutPage from './pages/AboutPage'
+import RewardsPage from './pages/RewardsPage'
 
 function App() {
   const { theme } = useThemeStore()
@@ -41,6 +42,7 @@ function App() {
         <Route path="/course/:slug" element={<CourseDetailPage />} />
         <Route path="/podcast" element={<PodcastPage />} />
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/rewards" element={<RewardsPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/purchase" element={<PurchasePage />} />
         <Route path="/about" element={<AboutPage />} />
