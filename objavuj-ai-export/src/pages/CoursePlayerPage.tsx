@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   ChevronLeft,
@@ -24,6 +24,7 @@ import { LessonListItem } from '@/components/course/LessonListItem'
 import { FloatingAIAssistant } from '@/components/course/FloatingAIAssistant'
 import { ApplicationIcons } from '@/components/course/ApplicationIcons'
 import { useTranslation } from '@/hooks/useTranslation'
+import { usePlayerVisibility } from '@/hooks/usePlayerVisibility'
 import {
   fetchCourseBySlug,
   fetchModules,
@@ -55,6 +56,7 @@ const CoursePlayerPage: React.FC = () => {
   const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isMainPlayerVisible, playerRef] = usePlayerVisibility()
 
   useEffect(() => {
     const loadData = async () => {
@@ -149,6 +151,7 @@ const CoursePlayerPage: React.FC = () => {
       onNextLesson={nextLesson ? () => navigateToLesson(nextLesson.moduleId, nextLesson.id) : undefined}
       hasPrevLesson={!!prevLesson && !prevLesson.isLocked}
       hasNextLesson={!!nextLesson && !nextLesson.isLocked}
+      showMiniPlayer={!isMainPlayerVisible && !!lessonAudioUrl}
     >
       <div className="h-[calc(100vh-3.5rem)] flex">
         {/* Mobile Sidebar Toggle */}
@@ -245,7 +248,7 @@ const CoursePlayerPage: React.FC = () => {
               
               {/* Audio Player - Directly under lesson title */}
               {lessonAudioUrl && (
-                <div className="mb-6">
+                <div ref={playerRef} className="mb-6">
                   <AudioPlayer 
                     src={lessonAudioUrl} 
                     title={`${t('player.lesson')} ${currentLesson.order}: ${currentLesson.title}`}
